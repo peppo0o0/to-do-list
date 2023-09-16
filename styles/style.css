@@ -1,7 +1,11 @@
+html {
+    background-image: linear-gradient(to right, blue , lightblue);
+}
+
 .header {
     width: 100%;
     height: 150px;
-    background-color: teal;
+    background-image: linear-gradient(to right, blue , lightblue);
     text-align: center;
     color: white;
     font-family: cursive;	
@@ -9,14 +13,15 @@
 
 #title {
     padding-top: 50px;
-    font-size: 25px;
+    font-size: 35px;
 }
 
 .bar{
- width: 100%;
- height: 55px;
- font-family: cursive;	
- text-align: center;
+    background-image: linear-gradient(to right, blue , lightblue);
+    width: 100%;
+    height: 55px;
+    font-family: cursive;	
+    text-align: center;
 }
 
 .bar input[type=text] {
@@ -30,7 +35,15 @@
 
 #addButton {
     float: left;
-    padding: 6px;
+    padding: 7px;
+    margin-top: 8px;
+    margin-right: 16px;
+    font-size: 17px;
+}
+
+#searchButton {
+    float: left;
+    padding: 7px;
     margin-top: 8px;
     margin-right: 16px;
     font-size: 17px;
