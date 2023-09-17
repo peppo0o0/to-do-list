@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const input = document.querySelector(".bar input[type=text]");
   const taskList = document.querySelector(".list-group");
 
-  // Seleccionar
+  // Seleccion de filas
   var list = document.querySelector('ul');
   list.addEventListener('click', function(ev) {
     if (ev.target.tagName === 'LI') {
@@ -24,7 +24,13 @@ document.addEventListener("DOMContentLoaded", () => {
         input.value = "";
     }
   };
-
-  // Boton Delete
   
+  // Botón Delete
+  deleteButton.onclick = () => {
+    const selectedItems = document.querySelectorAll('.list-group-item.checked');
+    selectedItems.forEach(function (item) {
+      item.remove();
+    });
+  };
+
 });
