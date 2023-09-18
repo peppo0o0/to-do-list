@@ -57,6 +57,14 @@ html {
     font-size: 17px;
 }
 
+#backButton {
+  float: left;
+  padding: 7px;
+  margin-top: 8px;
+  margin-right: 16px;
+  font-size: 17px;
+}
+
 ul {
     margin: 0;
     padding: 0;

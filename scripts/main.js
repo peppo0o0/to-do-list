@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
   const addButton = document.getElementById("addButton");
   const deleteButton = document.getElementById("deleteButton");
+  const backButton = document.getElementById("backButton");
   const input = document.querySelector(".bar input[type=text]");
   const taskList = document.querySelector(".list-group");
 
@@ -46,4 +47,12 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   };
 
+  // Back Button 
+  backButton.onclick = () => {
+    const listItems = document.querySelectorAll('.list-group-item');
+    listItems.forEach(function (item){
+      item.style.display = "block";
+      input.value = "";
+    }
+    )};
 });
