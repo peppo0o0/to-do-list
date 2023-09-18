@@ -1,11 +1,10 @@
-// Asignacion de los elementos HTML a variables JS
 document.addEventListener("DOMContentLoaded", () => {
   const addButton = document.getElementById("addButton");
   const deleteButton = document.getElementById("deleteButton");
   const input = document.querySelector(".bar input[type=text]");
   const taskList = document.querySelector(".list-group");
 
-  // Seleccion de filas
+  // Check
   var list = document.querySelector('ul');
   list.addEventListener('click', function(ev) {
     if (ev.target.tagName === 'LI') {
@@ -13,7 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }, false);
 
-  // Boton Add
+  // Add Button
   addButton.onclick = () => {
     const taskText = input.value;
     if (taskText !== "") {
@@ -25,11 +24,25 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   };
   
-  // Botón Delete
+  // Delete Button
   deleteButton.onclick = () => {
     const selectedItems = document.querySelectorAll('.list-group-item.checked');
     selectedItems.forEach(function (item) {
       item.remove();
+    });
+  };
+
+  // Search Button
+  searchButton.onclick = () => {
+    const searchInput = input.value;
+    const listItems = document.querySelectorAll('.list-group-item');
+    listItems.forEach(function (item) {
+      const itemValue = item.textContent;
+      if (itemValue.includes(searchInput)) {
+        item.style.display = "block";
+      } else {
+        item.style.display= "none";
+      }
     });
   };
 
