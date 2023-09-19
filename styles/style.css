@@ -89,10 +89,10 @@ ul li:hover {
   }
   
 ul li.checked {
-    background: #888;
-    color: #fff;
-    text-decoration: line-through;
-  }
+  background: #888;
+  color: #fff;
+  text-decoration: line-through;
+}
 
 ul li.checked::before {
     content: '';
@@ -105,4 +105,9 @@ ul li.checked::before {
     transform: rotate(45deg);
     height: 15px;
     width: 7px;
+    margin-right: 20px;
+  }
+
+  .list-group-item {
+    padding-left: 30px
   }
