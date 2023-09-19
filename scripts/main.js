@@ -39,7 +39,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const listItems = document.querySelectorAll('.list-group-item');
     listItems.forEach(function (item) {
       const itemValue = item.textContent;
-      if (itemValue.includes(searchInput)) {
+      if (itemValue.toLowerCase().includes(searchInput.toLowerCase())) {
         item.style.display = "block";
       } else {
         item.style.display= "none";
