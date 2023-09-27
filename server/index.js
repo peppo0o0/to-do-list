@@ -14,18 +14,15 @@ const connection = mysql.createConnection({
 app.set("port", process.env.PORT || 3000);
 
 app.get('/', (req, res) => {
-  res.json('Hello World!')
 
 connection.connect();
-let data
  
 connection.query('SELECT * FROM tasks', function (error, results, fields) {
   if (error) throw error;
-  data = results
+  res.json(results)
 });
- 
+
 connection.end();
-res.json(data)
 })
 
 app.listen(port, () => {
