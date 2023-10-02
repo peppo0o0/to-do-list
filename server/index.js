@@ -1,9 +1,11 @@
 // get the client
 const express = require('express');
 const app = express();
+var cors = require('cors');
 const port = 3000;
 const mysql = require('mysql2');
 app.set("port", process.env.PORT || 3000);
+const urlBase = "/api/task"
 
 // connection to the database
 const connection = mysql.createConnection({
@@ -16,9 +18,10 @@ const connection = mysql.createConnection({
 
 // middlewares
 app.use(express.json());
+app.use(cors());
 
 // GET, POST, DELETE & PUT
-app.get('/', (req, res) => {
+app.get(urlBase + '/', (req, res) => {
 
   connection.connect();
  
@@ -28,33 +31,33 @@ app.get('/', (req, res) => {
   });
 });
 
-app.post('/add', (req, res) => {
+app.post(urlBase + '/', (req, res) => {
   
   connection.connect();
 
-  connection.query('INSERT INTO tasks set ?', [req.body],function (error, results, fields) {
+  connection.query("INSERT INTO crudtodolist.tasks (task) VALUES (?)", [req.body.task],function (error, results, fields) {
     if (error) throw error;
-    res.redirect("/");
+    res.json('The task was added');
   });
 });
 
-app.delete('/:id', (req, res) => {
+app.delete(urlBase + '/:id', (req, res) => {
   
   connection.connect();
 
   connection.execute('DELETE FROM tasks WHERE id = ?', [req.params.id],function (error, results, fields) {
     if (error) throw error;
-    res.redirect("/");
+    res.json('The task was deleted');
   });
 });
 
-app.put('/:id', (req, res) => {
+app.put(urlBase + '/:id', (req, res) => {
   
   connection.connect();
 
-  connection.query('UPDATE tasks set ? WHERE id = ?', [req.body, req.params.id],function (error, results, fields) {
+  connection.query('UPDATE tasks set task = ? WHERE id = ?', [req.body.task, req.params.id],function (error, results, fields) {
     if (error) throw error;
-    res.redirect("/");
+    res.json('The task was updated');
   });
 });
 
