@@ -3,18 +3,25 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>To Do List</title>
 </head>
 <body>
-  <button id="btn"> Fetch </button>
-  <script>
-    const getTasks = async () => {
-      console.log('haciendo fetch')
-      const response = await fetch('http://localhost:3000/api/task')
-        const data = await response.json()
-        console.log('data', data)
-    }
-    getTasks()
-  </script>
+
+  <!--Title-->
+  <h1>List of Tasks:</h1>
+
+  <!--List-->
+  <ul class="list-group">
+
+  </ul>
+
+  <!--Buttons--> 
+  <button id="btnPost">POST</button>
+  <button id="btnDel">DELETE</button>
+  <button id="btnPut">PUT</button>
+
+  <!--JS File-->
+  <script src="/client/script.js"></script>
+
 </body>
 </html>
