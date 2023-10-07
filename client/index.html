@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>To Do List</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
@@ -15,13 +16,13 @@
 
   </ul>
 
-  <!--Buttons--> 
-  <button id="btnPost">POST</button>
-  <button id="btnDel">DELETE</button>
-  <button id="btnPut">PUT</button>
+  <div>
+    <label for="task">New Task</label>
+    <input type="text" name="task">
+    <button id="btn-create">Create task</button>
+  </div>
 
   <!--JS File-->
-  <script src="/client/script.js"></script>
-
+  <script src="./script.js"></script>
 </body>
 </html>

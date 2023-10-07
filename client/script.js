@@ -1,78 +1,59 @@
-const listTask = document.querySelector("ul");
-const btnPost = document.getElementById("btnPost");
-const btnDel = document.getElementById("btnDel");
-const btnPut = document.getElementById("btnPut")
-const newTask = {
-  task : 'darle comida al gato'
-};
+const listTask = document.querySelector(".list-group");
+const btnCreate = document.getElementById("btn-create");
+const apiUrl = 'http://localhost:3000/api/task'
 
-// Function to clean list after pressing any button
-function cleanList() {
-  document.getElementsByClassName("list-group")[0].innerHTML = "";
+// Creating task with their delete button 
+async function createTaskLi(post){
+  const li = document.createElement('li')
+  li.innerText = post.task
+  const button = document.createElement('button')
+  button.innerText = 'DELETE'
+  button.className = 'delete-button'
+
+  // Delete Button
+  button.addEventListener('click', async () => {
+    await delTasks(post.id)
+    await getTasks()
+  })
+
+  li.appendChild(button)
+  listTask.appendChild(li);
 }
 
 // Fetch API (GET)
 async function getTasks() {
-    const response = await fetch('http://localhost:3000/api/task');
+    const response = await fetch(apiUrl);
     const data = await response.json();
+    listTask.innerHTML = ''
     data.forEach(post => {
-      listTask.insertAdjacentHTML('beforeend', `<li>${post.task}</li>`);
-    });
-}
+      createTaskLi(post)
+    })
+};
 getTasks();
 
-// Fetch API (POST)
-async function postTasks() {
-  const response = await fetch('http://localhost:3000/api/task',{
-    method: 'POST',
-    headers: {
-      'Content-Type':'application/json'
-    },
-    body: JSON.stringify(newTask)
-  });
-  const data = await response.json();
-  data.forEach(post => {
-    listTask.insertAdjacentHTML('beforeend', `<li>${post.task}</li>`);
-  });
+// FETCH API (POST)
+async function createTask(newTask) {
+  if(newTask) {
+    await fetch(apiUrl,{
+      method: 'POST',
+      headers: {
+        'Content-Type':'application/json'
+      },
+      body: JSON.stringify({ task: newTask })
+    });
+  }
 }
-btnPost.addEventListener("click", () => {
-  postTasks();
-  cleanList();
-  getTasks();
-});
+
+// Add Button
+btnCreate.addEventListener('click', async () => {
+  const input = document.querySelector('input[name="task"]')
+  await createTask(input.value)
+  await getTasks()
+})
 
 // Fetch API (DELETE)
-async function delTasks() {
-  const response = await fetch('http://localhost:3000/api/task/84',{
+async function delTasks(id) {
+  const response = await fetch(`${apiUrl}/${id}`,{
     method: 'DELETE'
   });
-  const data = await response.json();
-  data.forEach(post => {
-    listTask.insertAdjacentHTML('beforeend', `<li>${post.task}</li>`);
-  });
-}
-btnDel.addEventListener("click", () => {
-  delTasks();
-  cleanList();
-  getTasks();
-});
-
-// Fetch API (PUT)
-async function putTasks() {
-  const response = await fetch('http://localhost:3000/api/task/23',{
-    method: 'PUT',
-    headers:{
-      'Content-Type' : 'application/json'
-    },
-    body : JSON.stringify(newTask)
-  });
-  const data = await response.json();
-  data.forEach(post => {
-    listTask.insertAdjacentHTML('beforeend', `<li>${post.task}</li>`);
-  });
-}
-btnPut.addEventListener("click", () => {
-  putTasks();
-  cleanList();
-  getTasks();
-});
+};
