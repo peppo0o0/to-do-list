@@ -5,24 +5,29 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>To Do List</title>
   <link rel="stylesheet" href="style.css">
+  <script src="https://kit.fontawesome.com/2d982338e7.js" crossorigin="anonymous"></script>
 </head>
 <body>
 
   <!--Title-->
-  <h1>List of Tasks:</h1>
+  <h1>To Do List <i class="fa-solid fa-clipboard-list"></i></h1>
+
+  <!--Input-->
+  <div id="input-box">
+    <label for="task"></label>
+    <input type="text" name="task" placeholder="Write your task...">
+    <button id="btn-create"><i class="fa-solid fa-plus"></i></button>
+    <button id="btn-search"><i class="fa-solid fa-magnifying-glass"></i></button>
+    <button id="btn-back"><i class="fa-solid fa-rotate-left"></i></button>
+  </div>
 
   <!--List-->
   <ul class="list-group">
 
   </ul>
 
-  <div>
-    <label for="task">New Task</label>
-    <input type="text" name="task">
-    <button id="btn-create">Create task</button>
-  </div>
-
-  <!--JS File-->
+  <!--JS Files-->
   <script src="./script.js"></script>
+
 </body>
 </html>
