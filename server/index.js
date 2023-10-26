@@ -56,8 +56,8 @@ app.put(urlBase + '/:id', (req, res) => {
   connection.connect();
 
   connection.query('UPDATE tasks set task = ? WHERE id = ?', [req.body.task, req.params.id],function (error, results, fields) {
-    if (error) throw error;
-    res.json('The task was updated');
+    if (error) res.status(500).json('Daniel la cago');
+    res.status(201).json('The task was updated');
   });
 });
 
