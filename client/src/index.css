@@ -12,6 +12,7 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
 a {
@@ -34,6 +35,7 @@ h1 {
   line-height: 1.1;
   text-align: center;
   margin-bottom: 1.5em;
+  width: auto;
 }
 
 button {
@@ -68,22 +70,22 @@ button:focus-visible {
   }
 }
 
-#nav-bar{
-  display: flex; 
+#nav-bar {
+  display: flex;
   margin-left: 45px;
 }
 
-#task-list{
+#task-list {
   text-align: left;
 }
 
-#task-list li{
+#task-list li {
   padding: 1.2em;
   list-style-type: none;
   font-size: 1.1em;
 }
 
-#task-list li:nth-child(odd){
+#task-list li:nth-child(odd) {
   color: white;
   background-color: #201f1f;
 }

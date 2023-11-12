@@ -1,84 +1,27 @@
-import { useState, useEffect } from 'react'
-import './App.css'
-import List from './components/List'
-const apiUrl = 'http://localhost:3000/api/task'
-
+import "./App.css";
+import List from "./components/List";
+import useTaskData from "./hooks/task";
+import { useSession } from "./hooks/session";
+// import useLoginUser from "./hooks/login";
 function App() {
-  const [tasks, setTasks ] = useState([])
-  const [item, setItem] = useState('')
-  const [isLoading, setIsLoading] = useState(true);
-  
-  // GET
-  const loadData = () => {
-    fetch(apiUrl)
-      .then((response) => response.json())
-      .then((data) => {
-        setTasks(data); 
-        setIsLoading(false); 
-      });
-  }
+  const {
+    tasks,
+    item,
+    isLoading,
+    deleteTask,
+    editTask,
+    addTask,
+    searchTask,
+    setNewItemValue,
+    refreshTask,
+  } = useTaskData();
 
-  useEffect(() => {
-    loadData()
-    return () => {}
-  }, []);
-
-  // POST
-  const addTask = async () => {
-    if (item.trim()) {
-      await fetch(apiUrl, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ task: item }), 
-      });
-      setItem('')
-      loadData()
-    }
-  };
-
-  // DELETE
-  async function deleteTask(id) {
-    await fetch(`${apiUrl}/${id}`,{
-      method: 'DELETE'
-    });
-    loadData()
-  };
-
-  // PUT
-  const editTask = async (id, newValue) => {
-    if (newValue) {
-      await fetch(`${apiUrl}/${id}`, {
-          method: 'PUT',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ task: newValue }),
-        });
-        loadData()
-    }
-  };
-
-  const backToTasks = () => {
-    setItem('')
-    loadData()
-  }
-
-  const searchTask = () => {
-    const filterTask = tasks.filter(task => task.task.toLowerCase().includes(item.toLowerCase()));
-    setTasks(filterTask);
-  }
-
-  const setNewItemValue = (e) => {
-    let inputValue = e.target.value;
-    setItem(inputValue)
-  }
-
+  const { logoutSession, session } = useSession();
+  // const { session } = useLoginUser();
   const buttonStyle = {
-    marginLeft: '20px',
-    color: 'red !important'
-  }
+    marginLeft: "20px",
+    color: "red !important",
+  };
 
   if (isLoading) {
     return (
@@ -90,18 +33,33 @@ function App() {
 
   return (
     <>
+      <h1>{session.isLogged ? "Estoy loggeado" : "no esta logeado"}</h1>
       <h1>To Do List</h1>
       <div id="nav-bar">
-      <input value={item} type="text" placeholder='Write your task...' onChange={setNewItemValue} />
-      <button style={buttonStyle} onClick={addTask}>Add</button>
-      <button style={buttonStyle} onClick={searchTask}>Search</button>
-      <button style={buttonStyle} onClick={backToTasks}>Back</button>
+        <input
+          value={item}
+          type="text"
+          placeholder="Write your task..."
+          onChange={setNewItemValue}
+        />
+        <button style={buttonStyle} onClick={addTask}>
+          Add
+        </button>
+        <button style={buttonStyle} onClick={searchTask}>
+          Search
+        </button>
+        <button style={buttonStyle} onClick={refreshTask}>
+          Back
+        </button>
       </div>
       <div id="task-list">
-        <List tasks={tasks} deleteItem={deleteTask} editItem={editTask}/>
+        <List tasks={tasks} deleteItem={deleteTask} editItem={editTask} />
       </div>
+      <button id="sign-in-button" onClick={logoutSession}>
+        Logout
+      </button>
     </>
-  )
+  );
 }
 
-export default App
+export default App;

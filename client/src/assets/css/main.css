@@ -1,8 +1,41 @@
 .edit-input {
-    margin-left: 10px;
+  margin-left: 10px;
 }
 .li-container {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#sign-in-button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin-top: 20px;
+  margin-right: 20px
+}
+
+#register-button {
+  margin-top: 10px;
+}
+
+#input-boxes {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.input-container {
+  margin: 5px;
+  display: block;
+  align-items: center;
+  padding: 10px;
+}
+
+.form-register-login {
+  background-color: #201f1f;
+  max-width: 450px;
+  margin: 0 auto;
+  border-radius: 25px;
+  padding: 15px;
 }
