@@ -2,10 +2,10 @@ const express = require("express");
 const router = express.Router();
 const createDbConnection = require("../database/database");
 
-router.get("/", async (req, res) => {
+router.get("/:user_id", async (req, res) => {
   try {
     const connection = await createDbConnection();
-    const [rows] = await connection.execute("SELECT * FROM tasks");
+    const [rows] = await connection.execute("SELECT * FROM tasks WHERE user_id = ?", [req.params.user_id]);
     res.json(rows);
   } catch (error) {
     res.status(400).json({
@@ -15,11 +15,12 @@ router.get("/", async (req, res) => {
 });
 
 router.post("/", async (req, res) => {
+  console.log('body', req.body)
   try {
     const connection = await createDbConnection();
     await connection.execute(
-      "INSERT INTO crudtodolist.tasks (task) VALUES (?)",
-      [req.body.task]
+      "INSERT INTO crudtodolist.tasks (task, user_id) VALUES (?, ?)",
+      [req.body.task, req.body.user_id]
     );
     res.json("The task was added");
   } catch (error) {

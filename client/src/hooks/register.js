@@ -1,15 +1,20 @@
 import { useState } from "react";
 import { USER_URL, HEADERS } from "../constants/request";
-import {
-  validateName,
-  validateEmail,
-  validatePassword,
-} from "../utils/validation";
+import { useNavigate } from "react-router-dom";
+import { validateSignup } from "../utils/validation";
+import { registrationAlert } from "../utils/alerts";
 
 export default function useUserData() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
+
+  const cleanUser = async () => {
+    setName("");
+    setEmail("");
+    setPassword("");
+  };
 
   const registerUser = async () => {
     try {
@@ -18,33 +23,24 @@ export default function useUserData() {
         headers: HEADERS,
         body: JSON.stringify({ name, email, password }),
       });
-      setName("");
-      setEmail("");
-      setPassword("");
-      alert("Successful registration")
-      window.location.replace("http://localhost:5173/login");
+      await cleanUser();
+      await registrationAlert();
+      navigate("/login");
     } catch (error) {
       console.log("Hubo un problema con la petición Fetch:" + error.message);
     }
   };
 
   const registerButton = async () => {
-    setName(name.trim())
-    setEmail(email.trim())
-    setPassword(password.trim())
+    setName(name.trim());
+    setEmail(email.trim());
+    setPassword(password.trim());
+
     try {
-      // validateSignup returns an array with all the signup validations
-      const validations = validateSignup({ name, email, password })
-      // If exist at least one validation it should show them into modal component
-      if(validations.length) {
-        // show modal with all validations
+      const validations = validateSignup(name, email, password);
+      if (!validations.length) {
+        await registerUser();
       }
-      if (validateName(name) && validateEmail(email) && validatePassword(password)) {
-        registerUser();
-      }
-      setName("");
-      setEmail("");
-      setPassword("");
     } catch (error) {
       console.log("Hubo un problema con la petición Fetch:" + error.message);
     }

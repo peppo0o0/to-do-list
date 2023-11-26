@@ -47,7 +47,12 @@ router.post("/login", async (req, res) => {
       const user = results[0];
       const match = await bcrypt.compare(password, user.password);
       if (match) {
-        res.json({ message: "Login successful", name: user.name });
+        const { id, email, name } = user
+        res.json({ 
+          id,
+          email,
+          name
+        });
       } else {
         res.status(400).json("Login failed")
       }

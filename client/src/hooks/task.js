@@ -1,14 +1,16 @@
 import { useState, useEffect } from "react";
 import { TASK_URL, HEADERS } from "../constants/request";
+import { useSession } from "./session";
 
 export default function useTaskData() {
+  const { session } = useSession()
   const [tasks, setTasks] = useState([]);
   const [item, setItem] = useState("");
   const [isLoading, setIsLoading] = useState(true);
 
   const loadData = async () => {
     try {
-      const response = await fetch(TASK_URL);
+      const response = await fetch(`${TASK_URL}/${session.id}`);
       const data = await response.json();
       setTasks(data);
       setIsLoading(false);
@@ -20,10 +22,14 @@ export default function useTaskData() {
   const addTask = async () => {
     try {
       if (item.trim("")) {
-        await fetch(TASK_URL, {
+        const payload = {
+          task: item,
+          user_id: session.id
+        }
+        await fetch(`${TASK_URL}`, {
           method: "POST",
           headers: HEADERS,
-          body: JSON.stringify({ task: item }),
+          body: JSON.stringify(payload),
         });
       }
       setItem("");

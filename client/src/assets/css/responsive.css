@@ -1,0 +1,59 @@
+@media (max-width: 767px) {
+  .enter-button-signin-login {
+    margin-left: 1.5em;
+  }
+
+  .top-right-button {
+    position: relative;
+    margin-left: 1em;
+  }
+
+  .top-right-button#logout-button {
+    position: absolute;
+  }
+
+  #dashboard-title {
+    margin-top: 1.5em;
+  }
+
+  #nav-bar input {
+    position: absolute;
+    width: 19.5em;
+    border-radius: 10px;
+    padding: 10px;
+    top: 15em;
+    margin-right: 3em;
+  }
+
+  #nav-bar button {
+    position: relative;
+    margin-top: 2em;
+    margin-bottom: 1em;
+    right: 2em;
+  }
+
+  #nav-bar {
+    justify-content: center;
+  }
+
+  #task-list li {
+    padding: 1em;
+    margin-bottom: 1em;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0);
+    margin-left: -2em;
+  }
+
+  #task-list input {
+    width: 42%;
+    margin-top: 0.5em;
+    float: right;
+  }
+
+  #task-list button {
+    margin-top: 0.5em;
+    margin-left: 2em;
+    align-self: flex-start;
+    width: 45%;
+    float: right;
+  }
+}

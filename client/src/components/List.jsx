@@ -1,5 +1,6 @@
 import "../assets/css/main.css";
 import ItemList from "./ItemList";
+import "../assets/css/responsive.css"
 
 export default function List(props) {
   return (

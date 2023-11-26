@@ -1,7 +1,7 @@
 import useLoginUser from "../hooks/login";
 import { Link } from "react-router-dom";
 
-function App() {
+function login() {
   const { email, password, setEmailValue, setPasswordValue, loginButton } =
     useLoginUser();
 
@@ -26,15 +26,17 @@ function App() {
             className="input-container"
           />
         </div>
-        <button onClick={loginButton} id="register-button">
-          Login
+        <button onClick={loginButton} className="enter-button-signin-login">
+          <i className="fa-solid fa-right-to-bracket" />
         </button>
         <Link to={`/register`}>
-          <button id="sign-in-button">Sign Up</button>
+          <button className="top-right-button" id="sign-up-button">
+            <i className="fa-solid fa-user-plus" />
+          </button>
         </Link>
       </div>
     </>
   );
 }
 
-export default App;
+export default login;

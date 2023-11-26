@@ -2,9 +2,13 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { USER_URL, HEADERS } from "../constants/request";
 import { useSession } from "./session";
+import {
+  loginEmptyFieldsAlert,
+  loginInvalidInformation,
+} from "../utils/alerts";
 
 export default function useLoginUser() {
-  const { session, setSession, setLocalStorageSession } = useSession();
+  const { setSession, setLocalStorageSession } = useSession();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
@@ -19,6 +23,7 @@ export default function useLoginUser() {
       if (response.ok) {
         const data = await response.json();
         const newSession = {
+          id: data.id,
           name: data.name,
           email,
           isLogged: true,
@@ -28,7 +33,7 @@ export default function useLoginUser() {
         navigate("/");
       } else {
         const error = await response.json();
-        alert(`error: ${response.status}, message: ${error}`);
+        loginInvalidInformation(error);
       }
     } catch (error) {
       throw error;
@@ -37,9 +42,7 @@ export default function useLoginUser() {
 
   const loginButton = async () => {
     try {
-      if (email.trim() && password.trim()) {
-        await loginUser();
-      }
+      !email.trim() && !password.trim() ? loginEmptyFieldsAlert() : await loginUser();
     } catch (error) {
       console.log("Hubo un problema con la petición Fetch:" + error.message);
     }

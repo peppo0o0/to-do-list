@@ -1,13 +1,14 @@
 import { useState } from "react";
+
 export default function ItemList(props) {
   const [editValue, setEditValue] = useState("");
   const button = (
-    <button onClick={() => props.deleteItem(props.index)}>Delete</button>
+    <button onClick={() => props.deleteItem(props.index)}><i className="fa-solid fa-trash"/></button>
   );
   const buttonEdit = (
     <span>
       <button onClick={() => props.editItem(props.index, editValue)}>
-        Edit
+        <i className="fa-solid fa-pen-to-square"/>
       </button>
       <input
         className="edit-input"

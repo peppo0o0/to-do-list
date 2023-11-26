@@ -6,6 +6,7 @@ export const useSession = () => {
 
   let defaultSession = JSON.parse(localStorage.getItem('account'))
   defaultSession = defaultSession || {
+    id: 0,
     name: "",
     email: "",
     isLogged: false,

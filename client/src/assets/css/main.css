@@ -1,21 +1,22 @@
 .edit-input {
   margin-left: 10px;
 }
+
 .li-container {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
-#sign-in-button {
+.top-right-button {
   position: absolute;
   top: 0;
   right: 0;
   margin-top: 20px;
-  margin-right: 20px
+  margin-right: 20px;
 }
 
-#register-button {
+.enter-button-signin-login {
   margin-top: 10px;
 }
 
@@ -38,4 +39,10 @@
   margin: 0 auto;
   border-radius: 25px;
   padding: 15px;
+}
+
+.swal-settings {
+  background-color: #242424;
+  color: white;
+  border-radius: 20px;
 }

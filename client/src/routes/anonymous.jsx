@@ -1,9 +1,10 @@
 import { Navigate } from "react-router-dom";
 import { useSession } from "../hooks/session";
 
-export default function PrivateRoutes(props) {
+export default function Anonymous(props) {
   const {session: { isLogged },} = useSession();
   return <>
-      {isLogged ? props.children : <Navigate to="/login" />}
+      {isLogged ? <Navigate to="/" /> : props.children}
   </>;
 }
+

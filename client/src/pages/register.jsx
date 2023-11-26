@@ -1,7 +1,7 @@
 import useUserData from "../hooks/register";
 import { Link } from "react-router-dom";
 
-function App() {
+function register() {
   const {
     name,
     email,
@@ -39,15 +39,18 @@ function App() {
             className="input-container"
           />
         </div>
-        <button onClick={registerButton} id="register-button">
-          Sign Up
+        <button onClick={registerButton} className="enter-button-signin-login">
+          <i className="fa-solid fa-user-plus" />
         </button>
         <Link to={`/login`}>
-          <button id="sign-in-button">Login</button>
+          <button className="top-right-button" id="log-in-button">
+            <i className="fa-solid fa-right-to-bracket" />
+          </button>
         </Link>
+        <p>Password: Minimum eight characters, at least one letter and one number:</p>
       </div>
     </>
   );
 }
 
-export default App;
+export default register;

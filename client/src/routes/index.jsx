@@ -1,23 +1,48 @@
 import { createBrowserRouter } from "react-router-dom";
 
-import Root from "../App";
+import Root from "../pages/Index";
 import Register from "../pages/register";
 import Login from "../pages/login";
 import ErrorPage from "../error-page";
 import PrivateRoute from "./privateroutes";
+import Anonymous from "./anonymous";
+// import AdminPage from "../pages/admin";
+// import AdminRoute from "./adminroute";
 
 export const router = createBrowserRouter([
   {
     path: "/",
-    element: <PrivateRoute><Root /></PrivateRoute>,
+    element: (
+      <PrivateRoute>
+        <Root />
+      </PrivateRoute>
+    ),
     errorElement: <ErrorPage />,
   },
+  // {
+  //   path: "/admin",
+  //   element: (
+  //     <PrivateRoute>
+  //         <AdminRoute>
+  //           <AdminPage/>
+  //         </AdminRoute>
+  //     </PrivateRoute>
+  //   ),
+  // },
   {
     path: "register",
-    element: <Register />,
+    element: (
+      <Anonymous>
+        <Register />
+      </Anonymous>
+    ),
   },
   {
     path: "login",
-    element: <Login />,
+    element: (
+      <Anonymous>
+        <Login />
+      </Anonymous>
+    ),
   },
 ]);
