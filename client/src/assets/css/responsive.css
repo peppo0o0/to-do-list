@@ -56,4 +56,17 @@
     width: 45%;
     float: right;
   }
+
+  /* Admin Dashboard */
+
+  #welcome-h1-admin {
+    margin-top: 1.5em;
+    text-align: center;
+    justify-content: center;
+  }
+
+  #count-user-task-container {
+    font-size: 13px;
+    margin-top: -40px;
+  }
 }

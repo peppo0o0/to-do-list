@@ -1,13 +1,14 @@
 import { useState, useEffect } from "react";
 import { TASK_URL, HEADERS } from "../constants/request";
 import { useSession } from "./session";
+import { useNavigate } from "react-router-dom";
 
 export default function useTaskData() {
-  const { session } = useSession()
+  const { session } = useSession();
   const [tasks, setTasks] = useState([]);
   const [item, setItem] = useState("");
   const [isLoading, setIsLoading] = useState(true);
-
+  const navigate = useNavigate();
   const loadData = async () => {
     try {
       const response = await fetch(`${TASK_URL}/${session.id}`);
@@ -24,8 +25,8 @@ export default function useTaskData() {
       if (item.trim("")) {
         const payload = {
           task: item,
-          user_id: session.id
-        }
+          user_id: session.id,
+        };
         await fetch(`${TASK_URL}`, {
           method: "POST",
           headers: HEADERS,
@@ -82,6 +83,10 @@ export default function useTaskData() {
     setTasks(filterTask);
   };
 
+  const redirectToDoList = () => {
+    navigate("/");
+  };
+
   useEffect(() => {
     loadData();
     return () => {};
@@ -97,5 +102,6 @@ export default function useTaskData() {
     searchTask,
     setNewItemValue,
     refreshTask,
+    redirectToDoList,
   };
 }

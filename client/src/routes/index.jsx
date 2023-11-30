@@ -6,8 +6,8 @@ import Login from "../pages/login";
 import ErrorPage from "../error-page";
 import PrivateRoute from "./privateroutes";
 import Anonymous from "./anonymous";
-// import AdminPage from "../pages/admin";
-// import AdminRoute from "./adminroute";
+import AdminPage from "../pages/admin";
+import AdminRoute from "./adminroute";
 
 export const router = createBrowserRouter([
   {
@@ -19,16 +19,14 @@ export const router = createBrowserRouter([
     ),
     errorElement: <ErrorPage />,
   },
-  // {
-  //   path: "/admin",
-  //   element: (
-  //     <PrivateRoute>
-  //         <AdminRoute>
-  //           <AdminPage/>
-  //         </AdminRoute>
-  //     </PrivateRoute>
-  //   ),
-  // },
+  {
+    path: "/admin",
+    element: (
+      <AdminRoute>
+        <AdminPage />
+      </AdminRoute>
+    ),
+  },
   {
     path: "register",
     element: (

@@ -27,10 +27,15 @@ export default function useLoginUser() {
           name: data.name,
           email,
           isLogged: true,
+          role: data.role,
         };
         setSession(newSession);
         setLocalStorageSession(newSession);
-        navigate("/");
+        if (data.role === "admin") {
+          navigate("/admin");
+        } else {
+          navigate("/");
+        }
       } else {
         const error = await response.json();
         loginInvalidInformation(error);
@@ -42,7 +47,9 @@ export default function useLoginUser() {
 
   const loginButton = async () => {
     try {
-      !email.trim() && !password.trim() ? loginEmptyFieldsAlert() : await loginUser();
+      !email.trim() && !password.trim()
+        ? loginEmptyFieldsAlert()
+        : await loginUser();
     } catch (error) {
       console.log("Hubo un problema con la petición Fetch:" + error.message);
     }

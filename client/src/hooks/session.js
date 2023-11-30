@@ -10,6 +10,7 @@ export const useSession = () => {
     name: "",
     email: "",
     isLogged: false,
+    role: "",
   }
   const [session, setSession] = useState(defaultSession);
 
@@ -19,7 +20,7 @@ export const useSession = () => {
 
   const logoutSession = () => {
     localStorage.removeItem("account");
-    navigate("login");
+    navigate("/login");
   };
 
   const loadAccount = () => {

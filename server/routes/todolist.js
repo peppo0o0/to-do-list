@@ -5,7 +5,10 @@ const createDbConnection = require("../database/database");
 router.get("/:user_id", async (req, res) => {
   try {
     const connection = await createDbConnection();
-    const [rows] = await connection.execute("SELECT * FROM tasks WHERE user_id = ?", [req.params.user_id]);
+    const [rows] = await connection.execute(
+      "SELECT * FROM tasks WHERE user_id = ?",
+      [req.params.user_id]
+    );
     res.json(rows);
   } catch (error) {
     res.status(400).json({
@@ -15,7 +18,7 @@ router.get("/:user_id", async (req, res) => {
 });
 
 router.post("/", async (req, res) => {
-  console.log('body', req.body)
+  console.log("body", req.body);
   try {
     const connection = await createDbConnection();
     await connection.execute(

@@ -46,3 +46,13 @@
   color: white;
   border-radius: 20px;
 }
+
+/* admin dashboard*/
+
+.admin-dashboard-top-button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin-top: 20px;
+  margin-right: 100px;
+}

@@ -2,6 +2,7 @@ import useLoginUser from "../hooks/login";
 import { Link } from "react-router-dom";
 
 function login() {
+  // console.log('env', import.meta.env)
   const { email, password, setEmailValue, setPasswordValue, loginButton } =
     useLoginUser();
 

@@ -1,6 +1,7 @@
 import List from "../components/List";
 import useTaskData from "../hooks/task";
 import { useSession } from "../hooks/session";
+import { useNavigate } from "react-router-dom";
 import "../App.css";
 
 export default function Index() {
@@ -16,8 +17,8 @@ export default function Index() {
     refreshTask,
   } = useTaskData();
 
-  const { logoutSession } = useSession();
-
+  const { session, logoutSession } = useSession();
+  const navigate = useNavigate();
   const buttonStyle = {
     marginLeft: "20px",
     color: "red !important",
@@ -68,6 +69,13 @@ export default function Index() {
       >
         <i className="fa-solid fa-right-from-bracket" />
       </button>
+      <div>
+        {session.role === "admin" && (
+          <button className="admin-dashboard-top-button" onClick={() => navigate("/admin")}>
+            <i className="fa-solid fa-user"/>
+          </button>
+        )}
+      </div>
     </>
   );
 }

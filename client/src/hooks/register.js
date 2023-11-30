@@ -2,7 +2,7 @@ import { useState } from "react";
 import { USER_URL, HEADERS } from "../constants/request";
 import { useNavigate } from "react-router-dom";
 import { validateSignup } from "../utils/validation";
-import { registrationAlert } from "../utils/alerts";
+import { registrationAlert, loginInvalidInformation } from "../utils/alerts";
 
 export default function useUserData() {
   const [name, setName] = useState("");
@@ -18,16 +18,21 @@ export default function useUserData() {
 
   const registerUser = async () => {
     try {
-      await fetch(USER_URL, {
+      const response = await fetch(USER_URL, {
         method: "POST",
         headers: HEADERS,
         body: JSON.stringify({ name, email, password }),
       });
-      await cleanUser();
-      await registrationAlert();
-      navigate("/login");
+      if (response.ok) {
+        await cleanUser();
+        await registrationAlert();
+        navigate("/login");
+      } else {
+        const error = await response.json();
+        loginInvalidInformation(error.message);
+      }
     } catch (error) {
-      console.log("Hubo un problema con la petición Fetch:" + error.message);
+      throw error;
     }
   };
 
