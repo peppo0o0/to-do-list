@@ -63,10 +63,19 @@
     margin-top: 1.5em;
     text-align: center;
     justify-content: center;
+    margin-bottom: 2px;
+  }
+
+  #admin-id{
+    margin-bottom:50px;
   }
 
   #count-user-task-container {
     font-size: 13px;
-    margin-top: -40px;
+    margin: auto;
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 }

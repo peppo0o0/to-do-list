@@ -1,8 +1,12 @@
 const express = require("express");
 const createDbConnection = require("../database/database");
+const createMongoDbConnection = require("../mongodb/database");
 const router = express.Router();
 const bcrypt = require("bcrypt");
 const saltRounds = 8;
+const { ObjectId } = require("mongodb");
+require("dotenv").config();
+const { MONGODB_DOCUMENT_ID } = process.env;
 
 router.get("/", async (req, res) => {
   try {
@@ -24,6 +28,7 @@ router.get("/", async (req, res) => {
 router.post("/", async (req, res) => {
   try {
     const connection = await createDbConnection();
+    const mongoDbConnection = await createMongoDbConnection();
     const { name, email, password } = req.body;
 
     const [users] = await connection.execute(
@@ -44,7 +49,18 @@ router.post("/", async (req, res) => {
       "INSERT INTO user (name, email, password, role) VALUES (?, ?, ?, 'user')",
       [name, email, hash]
     );
-    res.json("The user was added");
+      
+    const [rows] = await connection.execute(
+      "SELECT COUNT(*) AS user_total FROM user WHERE role = 'user'"
+    );
+    const user_total = rows[0].user_total;
+
+    await mongoDbConnection.updateOne(
+      { _id: new ObjectId(MONGODB_DOCUMENT_ID) },
+      { $set: { user_total: user_total } }
+    );
+
+    res.status(200).json("The user was added");
   } catch (error) {
     res.status(400).json({
       message: "Upps there was an error",
